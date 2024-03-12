@@ -14,6 +14,7 @@
         :chips="proprieties.chips"
         :multiple="proprieties.multiple"
         :color="proprieties.color"
+        :loading="proprieties.loading"
     ></v-autocomplete>
 </template>
 <script>

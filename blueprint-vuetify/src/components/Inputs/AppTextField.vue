@@ -1,19 +1,18 @@
 <template>
-    <div>
-        <v-text-field
-            v-model="inputValue"
-            :rules="[required,minCaracter,maxCaracter,validEmail,validRegex]"
-            :label="proprieties.label"
-            :placeholder="proprieties.placeholder"
-            :disabled="proprieties.disabled"
-            :id="proprieties.id"
-            :class="proprieties.class"
-            :type="proprieties.type"
-            :hint="proprieties.hint"
-            :clearable="proprieties.clearable"
-            :color="proprieties.color"
-        ></v-text-field>
-    </div>
+    <v-text-field
+        v-model="inputValue"
+        :rules="[required,minCaracter,maxCaracter,validEmail,validRegex]"
+        :label="proprieties.label"
+        :placeholder="proprieties.placeholder"
+        :disabled="proprieties.disabled"
+        :id="proprieties.id"
+        :class="proprieties.class"
+        :type="proprieties.type"
+        :hint="proprieties.hint"
+        :clearable="proprieties.clearable"
+        :color="proprieties.color"
+        :loading="proprieties.loading"
+    ></v-text-field>
 </template>
 <script>
     export default {
