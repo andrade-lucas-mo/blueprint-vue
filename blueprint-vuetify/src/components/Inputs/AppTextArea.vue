@@ -1,7 +1,7 @@
 <template>
-    <v-text-field
+    <v-textarea
         v-model="inputValue"
-        :rules="[required,minCaracter,maxCaracter,validEmail,validRegex]"
+        :rules="[required,minCaracter,maxCaracter]"
         :label="proprieties.label"
         :placeholder="proprieties.placeholder"
         :disabled="proprieties.disabled"
@@ -12,11 +12,14 @@
         :clearable="proprieties.clearable"
         :color="proprieties.color"
         :loading="proprieties.loading"
+        :bg-color="proprieties.bgColor"
         :prepend-icon="proprieties.prependIcon"
         :append-icon="proprieties.appendIcon"
         :prepend-inner-icon="proprieties.prependInnerIcon"
         :append-inner-icon="proprieties.appendInnerIcon"
-    ></v-text-field>
+        :rows="proprieties.rows"
+        :no-resize="proprieties.noResize"
+    ></v-textarea>
 </template>
 <script>
     export default {
@@ -51,22 +54,6 @@
                 if(this.rules && this.rules.maxCaracter && this.rules.maxCaracter.value){
                     const msg = this.rules.maxCaracter.msg ? this.rules.maxCaracter.msg : 'Max '+this.rules.maxCaracter.value+' characters'
                     return (v && v.length <= this.rules.maxCaracter.value) || msg
-                }
-                return true
-            },
-            validEmail(v){
-                if(this.rules && this.rules.validEmail){
-                    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                    const msg = this.rules.validEmail.msg ? this.rules.validEmail.msg : 'Invalid email'
-                    return regex.test(v) || msg;
-                }
-                return true
-            },
-            validRegex(v){
-                if(this.rules && this.rules.validRegex && this.rules.validRegex.value){
-                    const regex = new RegExp(this.rules.validRegex.value);
-                    const msg = this.rules.validRegex.msg ? this.rules.validRegex.msg : 'Invalid format'
-                    return regex.test(v) || msg;
                 }
                 return true
             }

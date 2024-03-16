@@ -1,11 +1,11 @@
 <template>
     <v-file-input
+        v-model="file"
         :rules="[required,minFiles,maxFiles]"
         :accept="proprieties.accept"
         :show-size="proprieties.showSize"
         :chips="proprieties.chips"
         :multiple="proprieties.multiple"
-        :counter="proprieties.counter"
         :label="proprieties.label"
         :placeholder="proprieties.placeholder"
         :disabled="proprieties.disabled"
@@ -21,7 +21,7 @@
     export default {
         data: () => (
             {
-                inputValue: ''
+                file: ''
             }
         ),
         props: {
@@ -55,13 +55,13 @@
             }
         },
         watch: {
-            inputValue(newValue) {
+            file(newValue) {
                 this.$emit('inputValue', newValue);
             }
         },
         mounted() {
             if (this.proprieties.value !== undefined) {
-                this.inputValue = this.proprieties.value;
+                this.file = this.proprieties.value;
             }
         }
     }
