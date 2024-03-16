@@ -1,27 +1,27 @@
 <template>
-    <v-combobox
-        v-model="inputValue"
-        :rules="[required,minSelected,maxSelected]"
-        :items="items"
+    <v-file-input
+        :rules="[required,minFiles,maxFiles]"
+        :accept="proprieties.accept"
+        :show-size="proprieties.showSize"
+        :chips="proprieties.chips"
+        :multiple="proprieties.multiple"
+        :counter="proprieties.counter"
         :label="proprieties.label"
         :placeholder="proprieties.placeholder"
         :disabled="proprieties.disabled"
         :id="proprieties.id"
         :class="proprieties.class"
-        :type="proprieties.type"
         :hint="proprieties.hint"
         :clearable="proprieties.clearable"
-        :chips="proprieties.chips"
-        :multiple="proprieties.multiple"
         :color="proprieties.color"
         :loading="proprieties.loading"
-    ></v-combobox>
+    ></v-file-input>
 </template>
 <script>
     export default {
         data: () => (
             {
-                inputValue: null
+                inputValue: ''
             }
         ),
         props: {
@@ -29,31 +29,30 @@
                 type: Object,
                 default: () => ({})
             },
-            items: Array,
             rules: Object
         },
         methods: {
             required (v) {
                 if(this.rules && this.rules.required){
                     const msg = this.rules.required.msg ? this.rules.required.msg : 'This field is required'
-                    return !!v || msg
+                    return (Array.isArray(v) && v.length > 0) || msg;
                 }
                 return true
             },
-            minSelected (v) {
-                if(this.rules && this.rules.minSelected && this.rules.minSelected.value){
-                    const msg = this.rules.minSelected.msg ? this.rules.minSelected.msg : 'Min '+this.rules.minSelected.value+' selections'
-                    return (v && v.length >= this.rules.minSelected.value) || msg
+            minFiles(v){
+                if(this.rules && this.rules.minFiles && this.rules.minFiles.value){
+                    const msg = this.rules.minFiles.msg ? this.rules.minFiles.msg : 'Min '+this.rules.minFiles.value+' files'
+                    return (Array.isArray(v) && v.length >= this.rules.minFiles.value) || msg
                 }
                 return true
             },
-            maxSelected (v) {
-                if(this.rules && this.rules.maxSelected && this.rules.maxSelected.value){
-                    const msg = this.rules.maxSelected.msg ? this.rules.maxSelected.msg : 'Max '+this.rules.maxSelected.value+' selections'
-                    return (v && v.length <= this.rules.maxSelected.value) || msg
+            maxFiles(v){
+                if(this.rules && this.rules.maxFiles && this.rules.maxFiles.value){
+                    const msg = this.rules.maxFiles.msg ? this.rules.maxFiles.msg : 'Max '+this.rules.maxFiles.value+' files'
+                    return (Array.isArray(v) && v.length <= this.rules.maxFiles.value) || msg
                 }
                 return true
-            },
+            }
         },
         watch: {
             inputValue(newValue) {

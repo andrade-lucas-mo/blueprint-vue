@@ -29,7 +29,7 @@
                 type: Object,
                 default: () => ({})
             },
-            items: Object,
+            items: Array,
             rules: Object
         },
         methods: {
@@ -49,7 +49,7 @@
             },
             maxSelected (v) {
                 if(this.rules && this.rules.maxSelected && this.rules.maxSelected.value){
-                    const msg = this.rules.maxSelected.msg ? this.rules.maxSelected.msg : 'Min '+this.rules.maxSelected.value+' selections'
+                    const msg = this.rules.maxSelected.msg ? this.rules.maxSelected.msg : 'Max '+this.rules.maxSelected.value+' selections'
                     return (v && v.length <= this.rules.maxSelected.value) || msg
                 }
                 return true

@@ -1,8 +1,9 @@
 <template>
-    <v-combobox
+    <v-select
         v-model="inputValue"
         :rules="[required,minSelected,maxSelected]"
         :items="items"
+        :item-props="itemProps"
         :label="proprieties.label"
         :placeholder="proprieties.placeholder"
         :disabled="proprieties.disabled"
@@ -15,7 +16,7 @@
         :multiple="proprieties.multiple"
         :color="proprieties.color"
         :loading="proprieties.loading"
-    ></v-combobox>
+    ></v-select>
 </template>
 <script>
     export default {
@@ -54,6 +55,13 @@
                 }
                 return true
             },
+            itemProps (v) {
+                return {
+                    title: v.title,
+                    value: v.value,
+                    subtitle: v.props
+                }
+            }
         },
         watch: {
             inputValue(newValue) {
